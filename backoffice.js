@@ -31,11 +31,19 @@ const handleSubmit = (event) => {
   })
     .then((response) => {
       if (response.ok) {
-        const alert = document.getElementById("alert");
-        alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
-        Il contenuto <strong>${data.name}</strong> è stato creato corretamente.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>`;
+        if (id) {
+          const alert = document.getElementById("alert");
+          alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+          Il contenuto <strong>${data.name}</strong> è stato modificato corretamente.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+        } else {
+          const alert = document.getElementById("alert");
+          alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+          Il contenuto <strong>${data.name}</strong> è stato creato corretamente.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+        }
       } else {
         throw new Error();
       }
@@ -60,6 +68,12 @@ const handleDelete = () => {
     })
       .then((response) => {
         if (response.ok) {
+          const alert = document.getElementById("alert");
+          alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+          Il contenuto <strong>${document.getElementById("name").value}</strong> è stato eliminato corretamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+          form.reset();
         } else {
           throw new Error();
         }
@@ -112,6 +126,5 @@ if (id) {
     .catch((err) => {
       console.log(err);
     });
-} else {
-  form.addEventListener("submit", handleSubmit);
 }
+form.addEventListener("submit", handleSubmit);

@@ -24,12 +24,12 @@ const fetchProduct = (URL) => {
       const col = document.createElement("div");
       col.classList.add("col");
       col.innerHTML = `
-        <img src="${imageUrl}" class=" img-fluid mt-5"/>
+        <img src="${imageUrl}" class=" img-fluid "/>
         `;
       const col2 = document.createElement("div");
       col2.classList.add("col");
       col2.innerHTML = `
-        <div class="mt-5 mb-4">
+        <div class=" mb-4">
         <h1 class="fs-4"> ${name} </h1>
         <p class="fs-5 text-danger fw-semibold "> ${price}€</p>
       
