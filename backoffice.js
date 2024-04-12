@@ -10,27 +10,31 @@ const URLToUse = id ? URLAndId : URLbasic;
 const form = document.querySelector("form");
 
 const handleDelete = () => {
-  fetch(URLAndId, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE4ZTY1NzdmMzA0NjAwMWFlNTlmNWUiLCJpYXQiOjE3MTI5MDc4NjMsImV4cCI6MTcxNDExNzQ2M30.MQwAGW4OwOKbVuXMfUAqhEzXOXcTW6b_h-fzQ_3HcIk",
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        const alert = document.getElementById("alert");
-        alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+  const hasConfirmed = confirm("vuoi eliminare il prodotto?");
+
+  if (hasConfirmed) {
+    fetch(URLAndId, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE4ZTY1NzdmMzA0NjAwMWFlNTlmNWUiLCJpYXQiOjE3MTI5MDc4NjMsImV4cCI6MTcxNDExNzQ2M30.MQwAGW4OwOKbVuXMfUAqhEzXOXcTW6b_h-fzQ_3HcIk",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          const alert = document.getElementById("alert");
+          alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
       Il contenuto <strong>${data.name}</strong> è stato eliminato corretamente.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>`;
-      } else {
-        throw new Error();
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
 if (id) {
   const h1 = document.querySelector("h1");
@@ -108,7 +112,11 @@ const handleSubmit = (event) => {
 
 const btnReset = document.getElementById("btnReset");
 btnReset.addEventListener("click", () => {
-  form.reset();
+  const hasConfirmed = confirm("vuoi resettare il form?");
+
+  if (hasConfirmed) {
+    form.reset();
+  }
 });
 
 form.addEventListener("submit", handleSubmit);
