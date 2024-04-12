@@ -66,7 +66,7 @@ const fetchRecommended = (URL) => {
       for (let i = 0; i < 4; i++) {
         isLoading(false);
         const row = document.getElementById("recommended-container");
-        const { name, imageUrl, price } = product[i];
+        const { _id, name, imageUrl, price } = product[i];
         const col = document.createElement("div");
         col.classList.add("col");
         const card = document.createElement("div");
@@ -82,10 +82,11 @@ const fetchRecommended = (URL) => {
           "rounded-4"
         );
         card.innerHTML = `
-        <img src="${imageUrl}" class="card-img-top mt-3 p-2" style=" width: 100px; height:80px; object-fit:cover; ">
+        <img src="${imageUrl}" class="card-img-top mt-2 p-2" style=" width: 100px; height:80px; object-fit:cover; ">
         <div class="card-body">
           <h5 class="card-title">${name}</h5>
           <p class="card-text fs-3 font-monospace">${price}€</p>
+          <a href="${"./details.html?id=" + _id}" class="btn btn-outline-danger ">Vai al prodotto</a>
         </div> 
         `;
 
